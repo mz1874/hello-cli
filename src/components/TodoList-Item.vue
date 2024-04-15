@@ -4,10 +4,11 @@
     <div>
         <li>
             <label>
-                <input type="checkbox" :checked="item.done"/>
+                <input type="checkbox" :checked="item.done" @click="handlerClick(item.id)"/>
+<!--                <input type="checkbox" v-model="item.done"/>-->
                 <span>{{item.title}}</span>
             </label>
-            <button class="btn btn-danger" style="display:none">删除</button>
+            <button class="btn btn-danger" @click="deleteItem(item.id)">删除</button>
         </li>
     </div>
 </template>
@@ -16,7 +17,17 @@
 <script>
 export default {
     name : "TodoList-Item",
-    props:['item']
+    // props 是不允许被修改的,但是这个修改item.done 是修改这个对象内的数据,并不是修改了这个对象.
+    // vue的props只能监视的是props对象内的数据,但是不能修改props对象或者属性
+    props:['item','checkTodo','deleteTodoItem'],
+    methods:{
+        handlerClick(value){
+            this.checkTodo(value);
+        },
+        deleteItem(value){
+            this.deleteTodoItem(value)
+        }
+    }
 }
 </script>
 
@@ -54,5 +65,13 @@ li:before {
 
 li:last-child {
     border-bottom: none;
+}
+
+li:hover{
+    background: #dddddd;
+}
+
+li:hover button {
+    display: block;
 }
 </style>

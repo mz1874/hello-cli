@@ -2,19 +2,35 @@
     <div>
         <div class="todo-footer">
             <label>
-                <input type="checkbox"/>
+                <input type="checkbox" :checked="finished == list.length  && finished !==0" @change="checkAll($event.target.checked)"/>
             </label>
             <span>
-          <span>已完成0</span> / 全部2
+          <span>已完成{{finished}}</span> / 全部{{list.length}}
         </span>
-            <button class="btn btn-danger">清除已完成任务</button>
+            <button class="btn btn-danger" @click="deleteSelected">清除已完成任务</button>
         </div>
     </div>
 </template>
 
 <script>
 export default {
-    name : "TodoList-Footer"
+    name : "TodoList-Footer",
+    props:['list','checkedAll','deleteFinished'],
+    computed:{
+        finished (){
+            return this.list.filter(e=>{
+                return e.done
+            }).length
+        }
+    },
+    methods:{
+        checkAll(value){
+            this.checkedAll(value);
+        },
+        deleteSelected(){
+            this.deleteFinished();
+        }
+    }
 }
 </script>
 

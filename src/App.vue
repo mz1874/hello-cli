@@ -4,8 +4,8 @@
           <div class="todo-container">
               <div class="todo-wrap">
                   <TodoListHeader :receiveData="receiveData"></TodoListHeader>
-                  <TodoListList :list="list" ></TodoListList>
-                  <TodoListFooter></TodoListFooter>
+                  <TodoListList :list="list" :checkTodo="checkTodo" :deleteTodoItem="deleteTodoItem"></TodoListList>
+                  <TodoListFooter :list="list" :checkedAll="checkedAll" :deleteFinished="deleteFinished"></TodoListFooter>
               </div>
           </div>
       </div>
@@ -58,7 +58,29 @@ export default {
       // 父组件给子组件一个函数, 当子组件调用的时候,把消息传递给父组件
       receiveData(value){
           this.list.push(value   )
-      }
+      },
+        checkTodo(id){
+            this.list.forEach(e=>{
+                if (e.id===id){
+                    e.done = !e.done;
+                }
+            })
+        },
+        deleteTodoItem(id){
+           this.list =  this.list.filter(e=>{
+                return e.id !==id;
+            })
+        },
+        checkedAll(status){
+          this.list.forEach(e=>{
+              e.done = status;
+          })
+        },
+        deleteFinished(){
+          this.list = this.list.filter(e=>{
+              return e.done === false;
+          })
+        }
     }
 }
 </script>
@@ -71,7 +93,7 @@ export default {
     }
 
     .btn {
-        display: inline-block;
+        //display: inline-block;
         padding: 4px 12px;
         margin-bottom: 0;
         font-size: 14px;
