@@ -22,3 +22,12 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+```angular2html
+npm install @vue-cli
+```
+
+```angular2html
+npm create [project-name]
+```
