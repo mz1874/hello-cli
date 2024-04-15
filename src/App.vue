@@ -25,33 +25,7 @@ export default {
   },
     data(){
         return{
-            list:[
-                {
-                    id:"1",
-                    title:"吃饭",
-                    done:true
-                },
-                {
-                    id:"2",
-                    title:"睡觉",
-                    done:false
-                },
-                {
-                    id:"3",
-                    title:"打豆豆",
-                    done:true
-                },
-                {
-                    id:"4",
-                    title:"抽烟",
-                    done:true
-                },
-                {
-                    id:"5",
-                    title:"喝酒",
-                    done:false
-                }
-            ]
+            list:JSON.parse(localStorage.getItem("list"))
         }
     },
     methods:{
@@ -80,6 +54,18 @@ export default {
           this.list = this.list.filter(e=>{
               return e.done === false;
           })
+        }
+    },
+    watch:{
+        // list(value){
+        //     localStorage.setItem("list",JSON.stringify(value))
+        // }
+        list:{
+            // 深度监视解决勾选完成不更新到localStorage的问题
+            deep : true,
+            handler(value){
+                localStorage.setItem("list",JSON.stringify(value))
+            }
         }
     }
 }
