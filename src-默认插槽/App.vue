@@ -3,13 +3,7 @@
     <category title="Games" :ListData="games"/>
     <category title="Movies" :ListData="movies"/>
     <category title="Musics" :ListData="music">
-      <!--  普通插槽    -->
       <h1>你好</h1>
-      <!-- 这种插槽的使用方法是Vue3 中推荐的使用方式, 因为v-slot只能使用在template 中     -->
-      <template v-slot:named-slot>
-        <h3>具名插槽</h3>
-      </template>
-
     </category>
   </div>
 </template>
