@@ -25,7 +25,7 @@ export default {
   },
     data(){
         return{
-            list:JSON.parse(localStorage.getItem("list"))
+            list: localStorage.getItem("list") == null ? [] : JSON.parse(localStorage.getItem("list"))
         }
     },
     methods:{

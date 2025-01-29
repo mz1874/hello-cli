@@ -12,7 +12,7 @@ Vue.config.productionTip = false
 //全局注册mixIn,所有的组件都会被混合
 // Vue.mixin(mixIn)
 
-Vue.prototype.x ={}
+// Vue.prototype.x ={}
 
 new Vue({
   //解决引入残缺版vue的问题
