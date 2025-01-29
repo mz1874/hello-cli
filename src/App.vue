@@ -1,18 +1,20 @@
 <template>
   <div class="container">
-    <category title="Games" :ListData="games"/>
-    <category title="Movies" :ListData="movies"/>
-    <category title="Musics" :ListData="music">
-      <!--  普通插槽    -->
-      <h1>你好</h1>
-      <!-- 这种插槽的使用方法是Vue3 中推荐的使用方式, 因为v-slot只能使用在template 中     -->
-      <template v-slot:named-slot>
+    <category title="Games">
+      <!-- 具名插槽 -->
+      <template #named-slot>
         <h3>具名插槽</h3>
       </template>
 
+      <!-- 作用域插槽（接收子组件传递的数据） -->
+      <template scope="games">
+        <p>作用域插槽：{{ games }}</p>
+      </template>
     </category>
   </div>
 </template>
+
+
 
 <script>
 import axios from "axios";
@@ -23,13 +25,7 @@ export default {
   components: {
     category,
   },
-  data() {
-    return {
-      games: ["游戏", "B", "C", "D"],
-      movies: ["电影", "Y", "z", "S"],
-      music: ["音乐", "V"]
-    }
-  },
+
   methods: {}
 }
 
