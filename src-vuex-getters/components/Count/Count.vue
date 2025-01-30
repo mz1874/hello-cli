@@ -1,7 +1,7 @@
 <template>
   <div class="Count">
-    <h1>当前的Sum为:{{ total }}</h1>
-    <h1>当前的Sum 放大十倍为:{{ bigSum }}</h1>
+    <h1>当前的Sum为:{{ $store.state.sum }}</h1>
+    <h1>当前的Sum 放大十倍为:{{ $store.getters.bigSum }}</h1>
     <select v-model.number="value">
       <option value="1">1</option>
       <option value="2">2</option>
@@ -15,8 +15,6 @@
 </template>
 
 <script>
-import {mapState, mapGetters} from "vuex";
-
 export default {
   name: 'Count',
   data() {
@@ -24,10 +22,6 @@ export default {
       sum: 0,
       value: 1,
     }
-  },
-  computed:{
-    ...mapState({'total':'sum'}),
-    ...mapGetters({'bigSum':"bigSum"})
   },
   methods: {
     increase() {
